@@ -1,0 +1,267 @@
+{
+  "fetch_time": "2026-07-04T21:39:18Z",
+  "config": {
+    "symbols": [
+      "BTC/USDT",
+      "ETH/USDT",
+      "SOL/USDT",
+      "DOGE/USDT",
+      "PEPE/USDT",
+      "WIF/USDT"
+    ],
+    "timeframes": [
+      "1h",
+      "1d"
+    ],
+    "exchanges": [
+      "binance",
+      "okx"
+    ],
+    "history_years": 2
+  },
+  "total_tasks": 24,
+  "completed": 24,
+  "failed": 0,
+  "entries": [
+    {
+      "exchange": "binance",
+      "symbol": "BTC/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\BTCUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "BTC/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\BTCUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "ETH/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\ETHUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "ETH/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\ETHUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "SOL/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\SOLUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "SOL/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\SOLUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "DOGE/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\DOGEUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "DOGE/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\DOGEUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "PEPE/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\PEPEUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "PEPE/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\PEPEUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "WIF/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\WIFUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "binance",
+      "symbol": "WIF/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\binance\\WIFUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "BTC/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\BTCUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "BTC/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\BTCUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "ETH/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\ETHUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "ETH/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\ETHUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "SOL/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\SOLUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "SOL/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\SOLUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "DOGE/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\DOGEUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "DOGE/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\DOGEUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "PEPE/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\PEPEUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "PEPE/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\PEPEUSDT_1d.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "WIF/USDT",
+      "timeframe": "1h",
+      "rows": 17520,
+      "start": "2024-07-04 22:00:00+00:00",
+      "end": "2026-07-04 21:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\WIFUSDT_1h.csv",
+      "status": "OK"
+    },
+    {
+      "exchange": "okx",
+      "symbol": "WIF/USDT",
+      "timeframe": "1d",
+      "rows": 730,
+      "start": "2024-07-05 00:00:00+00:00",
+      "end": "2026-07-04 00:00:00+00:00",
+      "filepath": "D:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\每日数据\\20260705\\raw\\okx\\WIFUSDT_1d.csv",
+      "status": "OK"
+    }
+  ]
+}
