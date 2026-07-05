@@ -1,0 +1,26 @@
+# ——— 密钥与配置（弹药，必须私藏）———
+.env
+*.key
+config.prod.json
+config.local.*
+secrets/
+
+# ——— 交易记录（暴露策略和仓位）———
+logs/
+*.csv
+*.jsonl
+
+# ——— Python 缓存 ———
+__pycache__/
+*.pyc
+*.pyo
+
+# ——— 数据文件 ———
+*.parquet
+
+# ——— IDE ———
+.vscode/
+.idea/
+
+# ——— 输出目录 ———
+output/
