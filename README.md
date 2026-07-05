@@ -113,7 +113,7 @@ Skills 位于 `skills/` 目录，由 Claude Code 自动加载。
 ### 前置安装
 
 1. **Python 3.9+** — 推荐 3.11
-2. **[Superpowers](https://github.com/qihangzhang-272/agent-skill-library)** — Claude Code Agent Skill 运行时，按官方文档安装配置
+2. **[Superpowers](https://github.com/obra/superpowers)** — Claude Code Agent Skill 运行时，按官方文档安装配置
 3. **DeepSeek API Key** — 用于 `external_signals/deepseek_client.py` 的 LLM 分析（可选）
 
 ### Python 依赖
