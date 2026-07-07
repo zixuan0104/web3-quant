@@ -97,15 +97,19 @@ class DataCleaner:
             return df
 
         # 合并重复时间戳（对齐后可能产生重复）
-        df = df.groupby(df.index).agg({
+        agg_map = {
             'open': 'first',
             'high': 'max',
             'low': 'min',
             'close': 'last',
             'volume': 'sum',
-            'symbol': 'first',
-            'exchange': 'first',
-        })
+        }
+        # symbol/exchange 列可能存在也可能不存在，存在时才聚合
+        if 'symbol' in df.columns:
+            agg_map['symbol'] = 'first'
+        if 'exchange' in df.columns:
+            agg_map['exchange'] = 'first'
+        df = df.groupby(df.index).agg(agg_map)
 
         return df
 

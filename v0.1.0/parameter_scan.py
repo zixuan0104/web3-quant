@@ -27,9 +27,9 @@ from backtest.engine import BacktestEngine
 from backtest.strategies.trend import TrendStrategy
 from backtest.strategies.momentum import MomentumStrategy
 
-# ═══════════════════════════════
+# ===============================
 # 配置
-# ═══════════════════════════════
+# ===============================
 CLEAN_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'clean')
 SYMBOL = 'BTC/USDT'
 TIMEFRAME = '1h'
@@ -37,9 +37,9 @@ INITIAL_CAPITAL = 10000
 SPLIT_RATIO = 0.7
 TOP_N = 10  # 每种策略输出 Top-10 参数组合
 
-# ═══════════════════════════════
+# ===============================
 # 参数网格
-# ═══════════════════════════════
+# ===============================
 
 TREND_GRID = {
     'fast_period': [10, 15, 20, 30, 40],
@@ -82,9 +82,9 @@ def run_scan(df, strategy_factory, param_grid, label):
     total = len(param_grid)
     start_time = datetime.now()
 
-    print(f"\n{'═' * 60}")
-    print(f"🔍 {label} — 参数扫描 ({total} 种组合)")
-    print(f"{'═' * 60}")
+    print(f"\n{'=' * 60}")
+    print(f"[SCAN] {label} — 参数扫描 ({total} 种组合)")
+    print(f"{'=' * 60}")
 
     for idx, params in enumerate(param_grid):
         strat = strategy_factory(*params)
@@ -118,7 +118,7 @@ def run_scan(df, strategy_factory, param_grid, label):
         pct = (idx + 1) / total * 100
         bar_len = 30
         filled = int(bar_len * (idx + 1) / total)
-        bar = '█' * filled + '░' * (bar_len - filled)
+        bar = '#' * filled + '.' * (bar_len - filled)
         elapsed = (datetime.now() - start_time).total_seconds()
         eta = elapsed / (idx + 1) * (total - idx - 1)
         print(f"\r  [{bar}] {pct:5.1f}% | {idx+1}/{total} | ETA: {eta:.0f}s", end='', flush=True)
@@ -134,20 +134,20 @@ def run_scan(df, strategy_factory, param_grid, label):
 def print_scan_results(results, param_names, label):
     """打印扫描结果 Top-N"""
     print(f"\n{'─' * 80}")
-    print(f"  🏆 {label} — Top-{TOP_N} (按样本外夏普排序)")
+    print(f"  [BEST] {label} — Top-{TOP_N} (按样本外夏普排序)")
     print(f"  {'Rank':<5} {'参数':<35} {'IS夏普':>8} {'OOS夏普':>8} {'OOS/IS':>8} {'全收益%':>9} {'胜率%':>8} {'交易':>6} {'判定':>10}")
     print(f"  {'─' * 75}")
 
     for rank, r in enumerate(results[:TOP_N], 1):
         oos_is = r['oos_is_ratio']
         if oos_is == float('inf') or np.isinf(oos_is):
-            verdict = '⚠️ IS≤0'
+            verdict = '[WARN] IS≤0'
         elif oos_is < 0.5:
-            verdict = '🔴 过拟合'
+            verdict = '[!OVF] 过拟合'
         elif oos_is < 0.7:
-            verdict = '🟡 可疑'
+            verdict = '[?SUS] 可疑'
         else:
-            verdict = '✅ 稳定'
+            verdict = '[OK] 稳定'
 
         # 格式化参数
         param_parts = []
@@ -161,8 +161,8 @@ def print_scan_results(results, param_names, label):
     positive_oos = sum(1 for r in results if r['oos_sharpe'] > 0)
     stable = sum(1 for r in results if r['oos_is_ratio'] >= 0.7 and r['oos_sharpe'] > 0)
 
-    print(f"\n  📊 统计: {len(results)} 组合 | OOS夏普>0: {positive_oos} 个 | 样本内外一致: {stable} 个")
-    print(f"  📊 OOS夏普 均值: {np.mean([r['oos_sharpe'] for r in results]):.3f} | "
+    print(f"\n  [STAT] 统计: {len(results)} 组合 | OOS夏普>0: {positive_oos} 个 | 样本内外一致: {stable} 个")
+    print(f"  [STAT] OOS夏普 均值: {np.mean([r['oos_sharpe'] for r in results]):.3f} | "
           f"中位数: {np.median([r['oos_sharpe'] for r in results]):.3f} | "
           f"最大: {max(r['oos_sharpe'] for r in results):.3f}")
 
@@ -171,24 +171,24 @@ def main():
     # ── 加载数据 ──
     filepath = os.path.join(CLEAN_DIR, f"BTCUSDT_1h.parquet")
     if not os.path.exists(filepath):
-        print(f"❌ 数据不存在: {filepath}")
+        print(f"[X] 数据不存在: {filepath}")
         sys.exit(1)
 
     df = pd.read_parquet(filepath)
-    print(f"📂 数据: {len(df):,} 行 | {df.index[0]} → {df.index[-1]}")
+    print(f"[LOAD] 数据: {len(df):,} 行 | {df.index[0]} → {df.index[-1]}")
 
-    # ═══════════════════════
+    # =======================
     # 趋势跟踪
-    # ═══════════════════════
+    # =======================
     trend_strategy_factory = lambda f, s, a: TrendStrategy(
         fast_period=f, slow_period=s, atr_stop=a
     )
     trend_results = run_scan(df, trend_strategy_factory, TREND_GRID_FILTERED, '趋势跟踪 (EMA交叉)')
     print_scan_results(trend_results, ['fast', 'slow', 'atr_stop'], '趋势跟踪')
 
-    # ═══════════════════════
+    # =======================
     # 动量
-    # ═══════════════════════
+    # =======================
     mom_strategy_factory = lambda f, s, a: MomentumStrategy(
         fast_momentum=f, slow_momentum=s, atr_stop=a
     )
@@ -196,8 +196,8 @@ def main():
     print_scan_results(mom_results, ['fast_mom', 'slow_mom', 'atr_stop'], '动量策略')
 
     # ── 综合排名 ──
-    print(f"\n{'═' * 80}")
-    print(f"  🏆🏆 跨策略 Top-{TOP_N} (按 OOS 夏普)")
+    print(f"\n{'=' * 80}")
+    print(f"  [BEST][BEST] 跨策略 Top-{TOP_N} (按 OOS 夏普)")
     print(f"  {'策略':<16} {'参数':<40} {'OOS夏普':>8} {'全收益%':>9} {'胜率%':>8}")
 
     all_top = []
@@ -211,7 +211,7 @@ def main():
     for rank, (name, r) in enumerate(all_top[:TOP_N], 1):
         print(f"  {rank:<2} {name:<14} {r['param_str']:<40} {r['oos_sharpe']:>8.3f} {r['full_return']:>8.2f}% {r['win_rate']:>7.1f}%")
 
-    print(f"\n✅ 参数扫描完成")
+    print(f"\n[OK] 参数扫描完成")
 
 
 if __name__ == '__main__':

@@ -60,6 +60,12 @@ class BaseStrategy:
     ADX_TRENDING_THRESHOLD = 20     # ADX < 此值视为震荡市
     ENABLE_ADX_FILTER = True        # 是否启用震荡市过滤
 
+    # ── 做空开关（Day 11 安全加固）──
+    # True  = 回测/全功能模式，多空双向
+    # False = 实盘起步模式，只做多不做空（避免保证金借币 + 强平风险）
+    # 实盘建议：先验证做多路径跑通，再改为 True
+    ALLOW_SHORT = True
+
     def __init__(self, name="BaseStrategy"):
         self.name = name
         self.position = None
@@ -150,7 +156,7 @@ class BaseStrategy:
 
             try:
                 long_signal = self.check_long_entry(bar, i)
-                short_signal = self.check_short_entry(bar, i)
+                short_signal = self.check_short_entry(bar, i) if self.ALLOW_SHORT else False
 
                 if long_signal and short_signal:
                     # 多空同时触发 → 按优先级选

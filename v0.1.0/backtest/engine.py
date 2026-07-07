@@ -47,11 +47,11 @@ class BacktestEngine:
             raise FileNotFoundError(f"数据文件不存在: {filepath}")
 
         df = pd.read_parquet(filepath)
-        print(f"📂 加载数据: {filepath} ({len(df):,} 行)")
+        print(f"[加载] {filepath} ({len(df):,} 行)")
 
         # 确认 anomaly 列存在
         if 'anomaly' not in df.columns:
-            print("  ⚠️ 数据中无 anomaly 列，所有 K 线视为正常")
+            print("  [WARN] 数据中无 anomaly 列，所有 K 线视为正常")
 
         return df
 
@@ -85,7 +85,7 @@ class BacktestEngine:
         entry_count = 0
         anomaly_skipped = 0
 
-        print(f"\n🔄 开始回测: {self.strategy.name}")
+        print(f"\n[开始回测] {self.strategy.name}")
         print(f"   数据: {df.index[0]} → {df.index[-1]} ({n:,} 根 K 线)")
         print(f"   样本内: 0 → {split_idx-1} ({split_idx:,} 根)")
         print(f"   样本外: {split_idx} → {n-1} ({n - split_idx:,} 根)")
@@ -149,7 +149,7 @@ class BacktestEngine:
 
         # ── 快速打印 ──
         fs = self.results['full_sample']
-        print(f"\n📊 回测完成:")
+        print(f"\n[回测完成]")
         print(f"   总交易: {fs['total_trades']} 笔")
         print(f"   胜率: {fs['win_rate']:.1f}%")
         print(f"   总收益: {fs['total_return_pct']:.2f}%")

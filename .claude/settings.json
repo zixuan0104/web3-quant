@@ -1,0 +1,74 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python test_*.py)",
+      "Bash(python _blind_spot_check.py *)",
+      "Bash(python run_backtest.py)",
+      "Bash(python run_live.py --mode paper)",
+      "Bash(python clean_data.py)",
+      "Bash(python update_data.py)",
+      "Bash(python compare_*.py)",
+      "Bash(python parameter_scan.py)",
+      "Bash(python optimize_btc.py)",
+      "Bash(python dual_trend.py)",
+      "Bash(python strategy_comparison.py)",
+      "Bash(python trend_report.py)",
+      "Bash(python order_type_comparison.py)",
+      "Bash(python run_paper_trade.py)",
+      "Bash(python run_backtest_1d.py)",
+      "Bash(python run_scan_1d_smallcoins.py)",
+      "Bash(python run_hot_tokens.py)",
+      "Bash(python run_external_signals.py)",
+      "Bash(python regime_classifier.py)",
+      "Bash(python strategy_orchestrator.py)",
+      "Bash(python -u _blind_spot_check.py *)",
+      "Bash(python -c *)",
+      "Bash(python -u -c *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(pip install *)",
+      "Bash(rm *)",
+      "Bash(cp *)",
+      "Bash(ls *)",
+      "Bash(echo *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(cat *)",
+      "Bash(sleep *)",
+      "Bash(nslookup github.com)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\HP\\.claude"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import os; path='C:\\\\Users\\\\HP\\\\.claude\\\\CLAUDE.md'; exec('pass')\" 2>nul; echo '=== 活跃待办 ===' && python -c \"import re; content=open(r'C:\\Users\\HP\\.claude\\CLAUDE.md','r',encoding='utf-8').read(); m=re.search(r'当前活跃待办.*?(?=\\n##|\\Z)', content, re.DOTALL); print(m.group(0) if m else '无待办段')\" 2>nul || echo  '待办文件读取失败'"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"d:\\WindowsDocuments\\HP\\Desktop\\playground\\web3量化0705\\v0.1.0\" && python -u _blind_spot_check.py --quick"
+          },
+          {
+            "type": "command",
+            "command": "echo '' && echo '========================================' && echo '  开发日结束 — 请确认以下事项' && echo '========================================' && echo '  1. CLAUDE.md 待办段是否更新？' && echo '  2. memory/ 待办文件是否同步？' && echo '  3. 学习笔记是否已写？' && echo '  4. 是否需要 git commit + push？' && echo '========================================'"
+          }
+        ]
+      }
+    ]
+  }
+}

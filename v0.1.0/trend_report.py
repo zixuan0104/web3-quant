@@ -17,7 +17,7 @@ Day 3 趋势跟踪策略正式回测报告
 亏损市场环境：震荡市（反复假突破）
 
 用法：
-    python day3_trend_report.py
+    python trend_report.py
 """
 
 import pandas as pd
@@ -366,8 +366,8 @@ def main():
     # ── 保存报告到文件 ──
     logs_dir = os.path.join(DATA_DIR, 'logs')
     os.makedirs(logs_dir, exist_ok=True)
-    report_path = os.path.join(logs_dir, f'day3_trend_report_{datetime.utcnow().strftime("%Y%m%d_%H%M%S")}.txt')
-    print(f"📂 报告已输出（重定向保存: python day3_trend_report.py > {report_path}）")
+    report_path = os.path.join(logs_dir, f'trend_report_{datetime.utcnow().strftime("%Y%m%d_%H%M%S")}.txt')
+    print(f"[报告] 重定向保存: python trend_report.py > {report_path}")
     print(f"\n✅ Day 3 趋势跟踪报告完成")
 
 

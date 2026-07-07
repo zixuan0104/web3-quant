@@ -141,6 +141,7 @@ def run_paper_mode(cfg, logger):
     # 创建策略
     strat_cfg = cfg.strategies[0]
     strategy = create_strategy(strat_cfg.name, strat_cfg.params)
+    strategy.ALLOW_SHORT = False  # Day 11 安全加固：实盘先验证做多路径，后续再开做空
     strategy.precompute(df)
     print(f"  ✅ 策略: {strategy.name}")
 

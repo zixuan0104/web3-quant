@@ -98,10 +98,17 @@ class DataFetcher:
             try:
                 exchange_class = getattr(ccxt, name)
                 cfg = self.config['exchange_config'].get(name, {})
+                # ccxt 4.x 不通过构造函数传 proxies，需要直接设 session
+                proxy_url = self.config['proxy']
                 self.exchanges[name] = exchange_class(cfg)
-                print(f"✅ {name} 连接成功")
+                if proxy_url and hasattr(self.exchanges[name], 'session'):
+                    self.exchanges[name].session.proxies.update({
+                        'http': proxy_url.get('http', ''),
+                        'https': proxy_url.get('https', ''),
+                    })
+                print(f"[OK] {name} 连接成功")
             except Exception as e:
-                print(f"❌ {name} 连接失败: {e}")
+                print(f"[X] {name} 连接失败: {e}")
                 self.exchanges[name] = None
 
     def fetch_ohlcv(self, exchange_name, symbol, timeframe, since, limit=1000):

@@ -31,9 +31,9 @@ CLEAN_DIR = os.path.join(DATA_DIR, 'clean')
 INITIAL_CAPITAL = 10000
 SPLIT_RATIO = 0.7
 
-# ═══════════════════════════════
+# ===============================
 # Part 1: BTC 1d 参数扫描
-# ═══════════════════════════════
+# ===============================
 
 # 聚焦趋势跟踪（1h→1d 后表现最好的策略），但三种都扫
 TREND_GRID_1D = {
@@ -56,7 +56,7 @@ def run_scan_1d(df, strategy_factory, param_grid, label, param_names):
     start_time = datetime.now()
 
     print(f"\n{'─' * 65}")
-    print(f"  🔍 {label} — {total} 种组合")
+    print(f"  [SCAN] {label} — {total} 种组合")
     print(f"  {'─' * 65}")
 
     for idx, params in enumerate(param_grid):
@@ -86,7 +86,7 @@ def run_scan_1d(df, strategy_factory, param_grid, label, param_names):
         pct = (idx + 1) / total * 100
         bar_len = 25
         filled = int(bar_len * (idx + 1) / total)
-        bar = '█' * filled + '░' * (bar_len - filled)
+        bar = '#' * filled + '.' * (bar_len - filled)
         print(f"\r    [{bar}] {pct:5.1f}% | {idx+1}/{total}", end='', flush=True)
 
     print()
@@ -100,22 +100,22 @@ def print_top(results, label, top_n=10):
         return
 
     positive = sum(1 for r in results if r['oos_sharpe'] > 0)
-    print(f"\n  🏆 {label} — Top-{top_n}")
+    print(f"\n  [BEST] {label} — Top-{top_n}")
     print(f"  {'Rank':<5} {'参数':<45} {'OOS夏普':>8} {'OOS收益%':>9} {'全夏普':>8} {'交易':>6} {'胜率%':>7}")
     print(f"  {'─' * 90}")
 
     for rank, r in enumerate(results[:top_n], 1):
         print(f"  {rank:<5} {r['param_str']:<45} {r['oos_sharpe']:>8.3f} {r['oos_return']:>8.2f}% {r['full_sharpe']:>8.3f} {r['total_trades']:>6.0f} {r['win_rate']:>6.1f}%")
 
-    print(f"\n  📊 OOS夏普>0: {positive}/{len(results)} | "
+    print(f"\n  [STAT] OOS夏普>0: {positive}/{len(results)} | "
           f"均值: {np.mean([r['oos_sharpe'] for r in results]):.3f} | "
           f"中位数: {np.median([r['oos_sharpe'] for r in results]):.3f} | "
           f"最大: {max(r['oos_sharpe'] for r in results):.3f}")
 
 
-# ═══════════════════════════════
+# ===============================
 # Part 2: 小币种回测
-# ═══════════════════════════════
+# ===============================
 
 def run_smallcoin_backtest(df, symbol, strategies):
     """对小币种运行三种策略，返回对比结果"""
@@ -132,7 +132,7 @@ def run_smallcoin_backtest(df, symbol, strategies):
 def print_smallcoin_comparison(btc_results, wif_results, pepe_results, label):
     """打印 BTC vs WIF vs PEPE 三方对比"""
     print(f"\n  {'─' * 90}")
-    print(f"  📊 {label}")
+    print(f"  [STAT] {label}")
     print(f"  {'指标':<20} {'BTC':>14} {'WIF':>14} {'PEPE':>14}")
     print(f"  {'─' * 68}")
 
@@ -159,14 +159,14 @@ def print_smallcoin_comparison(btc_results, wif_results, pepe_results, label):
 def main():
     # ── 加载 BTC 1d ──
     btc_1d = pd.read_parquet(os.path.join(CLEAN_DIR, 'BTCUSDT_1d.parquet'))
-    print(f"📂 BTC 1d: {len(btc_1d):,} 行")
+    print(f"[LOAD] BTC 1d: {len(btc_1d):,} 行")
 
-    # ═══════════════════════════════
+    # ===============================
     # Part 1: 参数扫描
-    # ═══════════════════════════════
-    print("\n" + "═" * 80)
+    # ===============================
+    print("\n" + "=" * 80)
     print("  Part 1: BTC 1d 参数扫描（趋势跟踪 + 动量）")
-    print("═" * 80)
+    print("=" * 80)
 
     # 趋势跟踪
     trend_grid = [
@@ -195,8 +195,8 @@ def main():
     print_top(mom_results, '动量策略')
 
     # ── 综合 Top-5 ──
-    print(f"\n{'═' * 80}")
-    print(f"  🏆🏆 跨策略 Top-5（按 OOS 夏普）")
+    print(f"\n{'=' * 80}")
+    print(f"  [BEST][BEST] 跨策略 Top-5（按 OOS 夏普）")
     all_top = []
     for r in trend_results[:5]:
         all_top.append(('趋势跟踪', r))
@@ -207,12 +207,12 @@ def main():
     for rank, (name, r) in enumerate(all_top[:5], 1):
         print(f"  {rank}. {name:<12} {r['param_str']:<45} OOS夏普={r['oos_sharpe']:.3f}  收益={r['oos_return']:.1f}%")
 
-    # ═══════════════════════════════
+    # ===============================
     # Part 2: 小币种回测
-    # ═══════════════════════════════
-    print("\n" + "═" * 80)
+    # ===============================
+    print("\n" + "=" * 80)
     print("  Part 2: 小币种 (WIF / PEPE) 1d 双向策略回测")
-    print("═" * 80)
+    print("=" * 80)
 
     # 使用 BTC 最优参数
     best_trend = trend_results[0]['params'] if trend_results else (5, 20, 2.0)
@@ -236,7 +236,7 @@ def main():
 
     # BTC 基准（用最优参数重跑）
     print(f"\n{'─' * 40}")
-    print("  📊 BTC 基准")
+    print("  [STAT] BTC 基准")
     btc_optimal = {}
     for name, factory in strategies.items():
         strat = factory()
@@ -248,7 +248,7 @@ def main():
     wif_1d = pd.read_parquet(os.path.join(CLEAN_DIR, 'WIFUSDT_1d.parquet'))
     wif_1d_cols = wif_1d.columns.tolist()
     print(f"\n{'─' * 40}")
-    print(f"  📊 WIF/USDT 1d — {len(wif_1d)} 行 | {wif_1d.index[0]} → {wif_1d.index[-1]}")
+    print(f"  [STAT] WIF/USDT 1d — {len(wif_1d)} 行 | {wif_1d.index[0]} → {wif_1d.index[-1]}")
     print(f"    起始价: ${wif_1d['close'].iloc[0]:.4f} → 结束价: ${wif_1d['close'].iloc[-1]:.4f}")
     print(f"    异常标记: {wif_1d['anomaly'].sum() if 'anomaly' in wif_1d.columns else 'N/A'} 天")
     wif_results = {}
@@ -260,13 +260,13 @@ def main():
             r = engine.run(wif_1d)
             wif_results[name] = r['full_sample']
         except Exception as e:
-            print(f"  ❌ WIF {name}: {e}")
+            print(f"  [X] WIF {name}: {e}")
             wif_results[name] = None
 
     # PEPE
     pepe_1d = pd.read_parquet(os.path.join(CLEAN_DIR, 'PEPEUSDT_1d.parquet'))
     print(f"\n{'─' * 40}")
-    print(f"  📊 PEPE/USDT 1d — {len(pepe_1d)} 行 | {pepe_1d.index[0]} → {pepe_1d.index[-1]}")
+    print(f"  [STAT] PEPE/USDT 1d — {len(pepe_1d)} 行 | {pepe_1d.index[0]} → {pepe_1d.index[-1]}")
     print(f"    起始价: ${pepe_1d['close'].iloc[0]:.8f} → 结束价: ${pepe_1d['close'].iloc[-1]:.8f}")
     print(f"    异常标记: {pepe_1d['anomaly'].sum() if 'anomaly' in pepe_1d.columns else 'N/A'} 天")
     pepe_results = {}
@@ -278,7 +278,7 @@ def main():
             r = engine.run(pepe_1d)
             pepe_results[name] = r['full_sample']
         except Exception as e:
-            print(f"  ❌ PEPE {name}: {e}")
+            print(f"  [X] PEPE {name}: {e}")
             pepe_results[name] = None
 
     # ── 三方对比 ──
@@ -291,8 +291,8 @@ def main():
         )
 
     # ── 价格变动背景 ──
-    print(f"\n{'═' * 80}")
-    print(f"  📈 两年价格变动背景")
+    print(f"\n{'=' * 80}")
+    print(f"  [UP] 两年价格变动背景")
     print(f"  {'币种':<12} {'起始价':>16} {'结束价':>16} {'涨幅':>12} {'波动率':>12}")
     print(f"  {'─' * 70}")
     for name, df_coin in [('BTC', btc_1d), ('WIF', wif_1d), ('PEPE', pepe_1d)]:
@@ -302,7 +302,7 @@ def main():
         vol = df_coin['close'].pct_change().std() * np.sqrt(365)
         print(f"  {name:<12} ${start_p:>15.6f} ${end_p:>15.6f} {chg:>+11.1f}% {vol:>11.1f}%")
 
-    print(f"\n✅ 扫描 + 小币种回测完成")
+    print(f"\n[OK] 扫描 + 小币种回测完成")
 
 
 if __name__ == '__main__':

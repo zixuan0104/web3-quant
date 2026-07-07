@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python run_live.py --mode paper)",
+      "Bash(\"C:/Program Files/GitHub CLI/gh.exe\" repo view zixuan0104/web3-quant --json url)",
+      "Bash(git config *)",
+      "Bash(ssh-keyscan -t rsa github.com)",
+      "Bash(git remote *)",
+      "Bash(python test_stop_loss.py)",
+      "Bash(awk '{print $NF}')",
+      "Bash(python regime_classifier.py)"
+    ]
+  }
+}

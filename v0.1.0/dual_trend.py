@@ -7,7 +7,7 @@ Day 3 — 双趋势策略回测对比（EMA 交叉 + Donchian 突破）
   通道突破：「价格突破 N 日高低点 = 市场选择方向，顺势跟进」
 
 用法：
-    python day3_dual_trend.py
+    python dual_trend.py
 """
 
 import pandas as pd
